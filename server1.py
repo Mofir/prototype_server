@@ -5,7 +5,7 @@ my_port = 19237
 import csv
 
 #retrieve HTML to web browser
-@app.route('/him', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_html():
     try:
         f = open(file_path, 'r')
@@ -24,12 +24,12 @@ def get_html():
 @app.route('/him', methods=['POST'])
 def update_data():
     time = request.form["time"]
-    temperature = request.form["temperature"]
+    sensors = request.form["sensors"]
     try:
         #write data to csv file
         with open(file_path, 'w') as f:
             _writer = csv.writer(f)
-            _writer = f.write(time + "," + temperature)
+            _writer = f.write(time + "," + sensors)
         return "success to write"
     except Exception as e:
         print(e)
