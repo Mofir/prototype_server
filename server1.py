@@ -26,9 +26,11 @@ def update_data():
     sensors = request.form["sensors"]
     try:
         #write data to csv file
-        with open(file_path, 'w') as f:
-            _writer = csv.writer(f)
-            _writer = f.write(time + "," + sensors)
+        f = open(file_path, 'w')
+        f.write(time + "," + sensors)
+        #with open(file_path, 'w') as f:
+        #    _writer = csv.writer(f)
+        #    _writer = f.write(time + "," + sensors)
         return "success to write"
     except Exception as e:
         print(e)
