@@ -10,14 +10,14 @@ def get_html():
     try:
         f = open(file_path, 'r')
         for row in f:
-            temp = row
-        return temp
+            sensors = row
+        return sensors
     except Exception as e:
         print(e)
         return e
     finally:
         f.close()
-    data = temp.split(',')
+    data = sensors.split(',')
     return render_template('./index.html', data = data)
 
 #receive & update sensor data
@@ -43,8 +43,8 @@ def get_data():
     try:
         f = open(file_path, 'r')
         for row in f:
-            temperature = row
-        return temperature
+            sensors = row
+        return sensors
     except Exception as e:
         print(e)
         return e
