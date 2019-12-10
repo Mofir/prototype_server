@@ -11,7 +11,6 @@ def get_html():
         f = open(file_path, 'r')
         for row in f:
             sensors = row
-        return sensors
     except Exception as e:
         print(e)
         return e
