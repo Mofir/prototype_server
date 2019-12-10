@@ -15,7 +15,7 @@
 <body onload="updateData('/him', 'time', 'pulse', 'temperature')">
 	<h1><a href="#">Let's see your condition!</a></h1>
 	<div id="time">Time: {{data[0]}}</div>
-	<div id="pulse">BPM<: {{data[1]}}/div>
+	<div id="pulse">BPM: {{data[1]}}</div>
 	<div id = "temperature">temperature: {{data[2]}}</div>
 	<input type="button" value="更新" onClick="updateDht('/him', 'time', 'pulse', 'temperature')">
 </body>
