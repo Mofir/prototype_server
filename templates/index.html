@@ -6,18 +6,18 @@
 		const updateData = async(url, time, pulse, temperature) => {
 			const sensorData = await fetch(url)
 									  .then(response => response.text())
-			const target = document.getElementById(time, pulse, temperature)
+			const target = document.getElementById(element)
 			target.innerHTML = `<h1>${sensorData}</h1>`
 		}
 	</script>
-	<meta http-equiv="refresh" content="3" charset="utf-8">
+	<meta http-equiv="refresh" content="5" charset="utf-8">
 </head>
 <body onload="updateData('/him', 'time', 'pulse', 'temperature')">
-	<h1><a href="#">Let's see your condition!</a></h1>
-	<div id="time">Time: {{data[0]}}</div>
-	<div id="pulse">BPM: {{data[1]}}</div>
-	<div id = "temperature">temperature: {{data[2]}}</div>
-	<input type="button" value="更新" onClick="updateDht('/him', 'time', 'pulse', 'temperature')">
+	<div class="title">Let's check health condition</div>
+	<p id="time">Time: {{data[0]}}</p>
+	<p id="temperature"> Temperature: {{data[1]}}</p>
+	<p id="pulse">Pulse: {{data[2]}}</p>
+	<input type="button" value="更新" onClick="updateDht('/him', 'time', 'temperature', 'pulse')">
 </body>
 </html>
 
@@ -25,21 +25,23 @@
 @import 'https://fonts.googleapis.com/css?family=Copse';
 
 body{
-	font-size: 15px;
-	line-height: 150%;
-	font-family: Georgia,"Times New Roman",Times,serif;
+	background-color: gray;
 }
 
-h1 a{
-	margin: 0 0 20px 0;
+div + .title{
+	text-align: center;
+	font-size: 24px;
+	margin-bottom: 18px;
+	color: green;
 }
 
-div{
-	margin: 0 0 10px 0;
+p{
+	margin: 0 0 12px 0;
+	font-size: 20px;
 	border-bottom: 1px dashed #888888;
 }
 
-div:hover{
+p:hover{
 	color: #57320e;
 	border-color: #d1cb7d;
 	background-color: #f5ec82;
