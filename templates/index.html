@@ -17,7 +17,27 @@
 	<p id="time">Time: {{data[0]}}</p>
 	<p id="temperature"> Temperature: {{data[1]}}</p>
 	<p id="pulse">Pulse: {{data[2]}}</p>
+	<br>
+	<br>
+	<div class="privateData">
+		<form action="/sensor_data.csv">
+		<p>Information of monitoring target!</p><br>
+		<p>名前: <input type="text" name="名前"></p><br>
+		<p>年齢: <input type="number" name="年齢"></p><br>
+		<br>
+		<input type="radio" name="gender" value="male" checked> Male<br>
+  		<input type="radio" name="gender" value="female"> Female<br><br>
+  		<p>Last Check Up?</p><br>
+  		<input type="checkbox" name="time" value="last week">last week <br>
+  		<input type="checkbox" name="time" value="last week">1 month ago <br>
+  		<br>
+  		<input type="submit" value="Submit">
+  		<input type="reset" name="">
+  		<input type="button" onclick="alert('Hello, Good Night!')" value="Click it!">
+		</form><br>
+	</div>
 	<input type="button" value="更新" onClick="updateDht('/him', 'time', 'temperature', 'pulse')">
+
 </body>
 </html>
 
@@ -25,14 +45,21 @@
 @import 'https://fonts.googleapis.com/css?family=Copse';
 
 body{
-	background-color: gray;
+	background-color: #c7f0db;
 }
 
-div + .title{
+.title{
 	text-align: center;
-	font-size: 24px;
+	font-size: 30px;
 	margin-bottom: 18px;
-	color: green;
+	color: #c06c84;
+}
+
+.info{
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 18px;
+	color: #c06c84;
 }
 
 p{
@@ -42,8 +69,8 @@ p{
 }
 
 p:hover{
-	color: #57320e;
+	color: #ff7315;
 	border-color: #d1cb7d;
-	background-color: #f5ec82;
+	background-color: #3a3535;
 }
 </style>
