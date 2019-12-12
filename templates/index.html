@@ -20,8 +20,7 @@
 
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript">
-		/*
-		var dps = {${sensorData}};
+		var dps = ${sensorData};
 
 		var chart = new CanvasJS.Chart("chartContainer", {
 			title: {
@@ -52,8 +51,9 @@
 		chart.render();		// update chart after specified time. 
  		};
 	setInterval(function(){updateChart()}, updateInterval);
-*/
+
 	</script>
+	<meta http-equiv="refresh" content="5" charset="utf-8">
 </head>
 <body onload="updateData('/him', 'element')">
 	<div class="title">Let's check health condition</div>
@@ -65,6 +65,7 @@
 	<p id="temperature"> Temperature: {{data[1]}}</p>
 	</div>
 	<br>
+
 	<div class="privateData">
 		<form action="/sensor_data.csv">
 		<p>Information of monitoring target!</p><br>
@@ -82,6 +83,7 @@
   		<input type="button" onclick="alert('Hello, Good Night!')" value="Click it!">
 		</form><br>
 	</div>
+
 	<input type="button" value="更新" onClick="updateData('/him', 'element')">
 
 </body>
