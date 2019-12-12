@@ -10,6 +10,12 @@
 			target.innerHTML = `<h1>${sensorData}</h1>`
 		}
 	</script>
+	<script type="text/javascript">
+    setInterval("my_function();",5000); 
+    function my_function(){
+      $('#refresh').load(index.html + ' #time' + '#temperature');
+    }
+  </script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript">
 		const updateData = async(url, time, pulse, temperature) => {
@@ -33,8 +39,7 @@
 			}
 			data: [{
 				type: "line"
-				 dataPoints:<?php echo json_encode(dps, 
-                            JSON_NUMERIC_CHECK); ?>
+				 dataPoints:dps
 			}]
 		});
 
@@ -52,14 +57,13 @@
 	setInterval(function(){updateChart()}, updateInterval);
 
 	</script>
-	
 </head>
-<body onload="updateData('/him', 'time', 'pulse', 'temperature')">
+<body onload="updateData('/him', 'time', 'temperature')">
 	<div class="title">Let's check health condition</div>
 	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
 	</div>
 	<br>
-	<div class="sensor">
+	<div id="refresh">
 	<p id="time">Time: {{data[0]}}</p>
 	<p id="temperature"> Temperature: {{data[1]}}</p>
 	</div>
@@ -81,7 +85,7 @@
   		<input type="button" onclick="alert('Hello, Good Night!')" value="Click it!">
 		</form><br>
 	</div>
-	<input type="button" value="更新" onClick="updateDht('/him', 'time', 'temperature', 'pulse')">
+	<input type="button" value="更新" onClick="updateData('/him', 'time', 'temperature')">
 
 </body>
 </html>
@@ -117,6 +121,9 @@ p{
 	<p id="pulse">Pulse: {{data[2]}}</p>
 	reload page
 	<meta http-equiv="refresh" content="5" charset="utf-8">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="reloader.js"></script>
 	*/
 }
 
