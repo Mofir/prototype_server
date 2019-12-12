@@ -12,7 +12,13 @@
 	</script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript">
-		var dps = [{x: {{data[0]}}, y: {{data[1]}}];
+		const updateData = async(url, time, pulse, temperature) => {
+			const sensorData = await fetch(url)
+									  .then(response => response.text())
+			const target = document.getElementById(element)
+			target.innerHTML = `<h1>${sensorData}</h1>`
+
+		var dps = {${sensorData}};
 
 		var chart = new CanvasJS.Chart("chartContainer", {
 			title: {
@@ -27,14 +33,15 @@
 			}
 			data: [{
 				type: "line"
-				dataPoints: dps
+				 dataPoints:<?php echo json_encode(dps, 
+                            JSON_NUMERIC_CHECK); ?>
 			}]
 		});
 
 		chart.render();
 
-		var xVal = {{data[0]}};
-		var yVal = {{data[1]}};	
+		var xVal = {data[0]};
+		var yVal = {data[1]};	
 		var updateInterval = 4000; //chart update every 4 seconds
  
 		var updateChart = function () {
@@ -52,19 +59,23 @@
 	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
 	</div>
 	<br>
+	<div class="sensor">
+	<p id="time">Time: {{data[0]}}</p>
+	<p id="temperature"> Temperature: {{data[1]}}</p>
+	</div>
 	<br>
 	<div class="privateData">
 		<form action="/sensor_data.csv">
 		<p>Information of monitoring target!</p><br>
-		<p>名前: <input type="text" name="名前"></p><br>
+		<p>名前: <input type="text" name="名前"></p>
 		<p>年齢: <input type="number" name="年齢"></p><br>
-		<br>
+		<p>Gender:</p>
 		<input type="radio" name="gender" value="male" checked> Male<br>
   		<input type="radio" name="gender" value="female"> Female<br><br>
-  		<p>Last Check Up?</p><br>
-  		<input type="checkbox" name="time" value="last week">last week <br>
-  		<input type="checkbox" name="time" value="last week">1 month ago <br>
-  		<br>
+  		<p>Last Check Up?</p>
+  		<input type="checkbox" name="time" value="last week">last week
+  		<input type="checkbox" name="time" value="last week">1 month ago
+  		<br><br>
   		<input type="submit" value="Submit">
   		<input type="reset" name="">
   		<input type="button" onclick="alert('Hello, Good Night!')" value="Click it!">
@@ -79,20 +90,26 @@
 @import 'https://fonts.googleapis.com/css?family=Copse';
 
 body{
-	background-color: #c7f0db;
+	background-color: #6c5b7b;
 }
-
 
 .title{
 	text-align: center;
 	font-size: 30px;
 	margin-bottom: 18px;
-	color: #c06c84;
+	color: #f67280;
+}
+
+.sensor{
+	text-align: center;
+	font-size: 30px;
+	margin-bottom: 10px;
 }
 
 p{
 	margin: 0 0 12px 0;
 	font-size: 20px;
+	color: #c7f0db;
 	/*border-bottom: 1px dashed #888888;
 	for display data
 	<p id="time">Time: {{data[0]}}</p>
@@ -103,9 +120,17 @@ p{
 	*/
 }
 
+p .id{
+
+}
+
 p:hover{
 	color: #ff7315;
 	border-color: #d1cb7d;
 	background-color: #3a3535;
+}
+
+form{
+	width: 60%;
 }
 </style>
