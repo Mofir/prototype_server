@@ -1,24 +1,34 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>プロトタイプ</title>
 	<script type="text/javascript">
-		const updateData = async(url, time, pulse, temperature) => {
+		const updateData = async(url, element) => {
 			const sensorData = await fetch(url)
 									  .then(response => response.text())
 			const target = document.getElementById(element)
 			target.innerHTML = `<h1>${sensorData}</h1>`
 		}
-	</script>
-	<script type="text/javascript">
-    setInterval("my_function();",5000); 
-    function my_function(){
-      $('#refresh').load(index.html + ' #time' + '#temperature');
+	
+	function reload() { 
+
+		jQuery.ajax({
+    	url: "http://160.16.210.86:19237/him",
+    	type: "POST",
+    	success:function(data){
+       	 $('#refresh').innerHTML(${sensorData});
+        		setTimeout(function(){
+            	reload()
+        		}, 4000);
+    		}
+		});
     }
-  </script>
+	</script>
+
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript">
-		const updateData = async(url, time, pulse, temperature) => {
+		/*const updateData = async(url, time, pulse, temperature) => {
 			const sensorData = await fetch(url)
 									  .then(response => response.text())
 			const target = document.getElementById(element)
@@ -55,10 +65,10 @@
 		chart.render();		// update chart after specified time. 
  		};
 	setInterval(function(){updateChart()}, updateInterval);
-
+	*/
 	</script>
 </head>
-<body onload="updateData('/him', 'time', 'temperature')">
+<body onload="updateData('/him', element)">
 	<div class="title">Let's check health condition</div>
 	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
 	</div>
@@ -85,7 +95,7 @@
   		<input type="button" onclick="alert('Hello, Good Night!')" value="Click it!">
 		</form><br>
 	</div>
-	<input type="button" value="更新" onClick="updateData('/him', 'time', 'temperature')">
+	<input type="button" value="更新" onClick="updateData('/him', 'element')">
 
 </body>
 </html>
@@ -104,13 +114,13 @@ body{
 	color: #f67280;
 }
 
-.sensor{
+div{
 	text-align: center;
 	font-size: 30px;
 	margin-bottom: 10px;
 }
 
-p{
+.privateData{
 	margin: 0 0 12px 0;
 	font-size: 20px;
 	color: #c7f0db;
@@ -127,11 +137,7 @@ p{
 	*/
 }
 
-p .id{
-
-}
-
-p:hover{
+.pivateData:hover{
 	color: #ff7315;
 	border-color: #d1cb7d;
 	background-color: #3a3535;
@@ -139,5 +145,6 @@ p:hover{
 
 form{
 	width: 60%;
+	padding: 30px 10px 30px 10px;
 }
 </style>
