@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>プロトタイプ</title>
 	<script type="text/javascript">
 		const updateData = async(url, time, pulse, temperature) => {
 			const sensorData = await fetch(url)
@@ -10,13 +10,47 @@
 			target.innerHTML = `<h1>${sensorData}</h1>`
 		}
 	</script>
-	<meta http-equiv="refresh" content="5" charset="utf-8">
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+		var dps = [{x: {data[0]}, y: {data[1]}}];
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+			title: {
+				text: "Temperature"
+			}
+			axisX: {
+				text: "Time"
+			}
+			axisY: {
+				text: "Temperature",
+				maximum: 40
+			}
+			data: [{
+				type: "line"
+				dataPoints: dps
+			}]
+		});
+
+		chart.render();
+
+		var xVal = {data[0]};
+		var yVal = {data[1]};	
+		var updateInterval = 4000; //chart update every 4 seconds
+ 
+		var updateChart = function () {
+		dps.push({x: xVal,y: yVal,});
+	
+		chart.render();		// update chart after specified time. 
+ 		};
+setInterval(function(){updateChart()}, updateInterval);
+
+	</script>
+	
 </head>
 <body onload="updateData('/him', 'time', 'pulse', 'temperature')">
 	<div class="title">Let's check health condition</div>
-	<p id="time">Time: {{data[0]}}</p>
-	<p id="temperature"> Temperature: {{data[1]}}</p>
-	<p id="pulse">Pulse: {{data[2]}}</p>
+	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
+	</div>
 	<br>
 	<br>
 	<div class="privateData">
@@ -48,14 +82,14 @@ body{
 	background-color: #c7f0db;
 }
 
-.title{
+.privateData{
 	text-align: center;
 	font-size: 30px;
 	margin-bottom: 18px;
 	color: #c06c84;
 }
 
-.info{
+.title{
 	text-align: center;
 	font-size: 30px;
 	margin-bottom: 18px;
@@ -65,7 +99,14 @@ body{
 p{
 	margin: 0 0 12px 0;
 	font-size: 20px;
-	border-bottom: 1px dashed #888888;
+	/*border-bottom: 1px dashed #888888;
+	for display data
+	<p id="time">Time: {{data[0]}}</p>
+	<p id="temperature"> Temperature: {{data[1]}}</p>
+	<p id="pulse">Pulse: {{data[2]}}</p>
+	reload page
+	<meta http-equiv="refresh" content="5" charset="utf-8">
+	*/
 }
 
 p:hover{
