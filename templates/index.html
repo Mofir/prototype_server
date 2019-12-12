@@ -10,30 +10,17 @@
 			const target = document.getElementById(element)
 			target.innerHTML = `<h1>${sensorData}</h1>`
 		}
-	
-	function reload() { 
+		
+		setInterval("my_function();",4000); 
+    	function my_function(){
+      		$('#refresh').load(location.href + '#refresh');
+    	}
 
-		jQuery.ajax({
-    	url: "http://160.16.210.86:19237/him",
-    	type: "POST",
-    	success:function(data){
-       	 $('#refresh').innerHTML(${sensorData});
-        		setTimeout(function(){
-            	reload()
-        		}, 4000);
-    		}
-		});
-    }
 	</script>
 
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript">
-		/*const updateData = async(url, time, pulse, temperature) => {
-			const sensorData = await fetch(url)
-									  .then(response => response.text())
-			const target = document.getElementById(element)
-			target.innerHTML = `<h1>${sensorData}</h1>`
-
+		/*
 		var dps = {${sensorData}};
 
 		var chart = new CanvasJS.Chart("chartContainer", {
@@ -65,10 +52,10 @@
 		chart.render();		// update chart after specified time. 
  		};
 	setInterval(function(){updateChart()}, updateInterval);
-	*/
+*/
 	</script>
 </head>
-<body onload="updateData('/him', element)">
+<body onload="updateData('/him', 'element')">
 	<div class="title">Let's check health condition</div>
 	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
 	</div>
@@ -114,11 +101,6 @@ body{
 	color: #f67280;
 }
 
-div{
-	text-align: center;
-	font-size: 30px;
-	margin-bottom: 10px;
-}
 
 .privateData{
 	margin: 0 0 12px 0;
@@ -137,14 +119,14 @@ div{
 	*/
 }
 
-.pivateData:hover{
+p:hover{
 	color: #ff7315;
 	border-color: #d1cb7d;
 	background-color: #3a3535;
 }
 
 form{
-	width: 60%;
-	padding: 30px 10px 30px 10px;
+	width: 70%;
+
 }
 </style>
