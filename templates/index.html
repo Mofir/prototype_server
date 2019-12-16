@@ -15,49 +15,12 @@
     	function my_function(){
       		$('#refresh').load(location.href + '#refresh');
     	}
-
 	</script>
-
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-	<script type="text/javascript">
-		var dps = ${sensorData};
-
-		var chart = new CanvasJS.Chart("chartContainer", {
-			title: {
-				text: "Temperature"
-			}
-			axisX: {
-				text: "Time"
-			}
-			axisY: {
-				text: "Temperature",
-				maximum: 40
-			}
-			data: [{
-				type: "line"
-				 dataPoints:dps
-			}]
-		});
-
-		chart.render();
-
-		var xVal = {data[0]};
-		var yVal = {data[1]};	
-		var updateInterval = 4000; //chart update every 4 seconds
- 
-		var updateChart = function () {
-		dps.push({x: xVal,y: yVal,});
-	
-		chart.render();		// update chart after specified time. 
- 		};
-	setInterval(function(){updateChart()}, updateInterval);
-
-	</script>
-	<meta http-equiv="refresh" content="5" charset="utf-8">
+	<meta http-equiv="refresh" content="4">
 </head>
 <body onload="updateData('/him', 'element')">
 	<div class="title">Let's check health condition</div>
-	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
+	<div id="chartContainer"  style="height: 200px; width: 60%; margin-left: 15%;">
 	</div>
 	<br>
 	<div class="sensors" >
@@ -128,6 +91,40 @@ body{
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="reloader.js"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+		var dps = ${sensorData};
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+			title: {
+				text: "Temperature"
+			}
+			axisX: {
+				text: "Time"
+			}
+			axisY: {
+				text: "Temperature",
+				maximum: 40
+			}
+			data: [{
+				type: "line"
+				 dataPoints:dps
+			}]
+		});
+
+		chart.render();
+
+		var xVal = {data[0]};
+		var yVal = {data[1]};	
+		var updateInterval = 4000; //chart update every 4 seconds
+ 
+		var updateChart = function () {
+		dps.push({x: xVal,y: yVal,});
+	
+		chart.render();		// update chart after specified time. 
+ 		};
+	setInterval(function(){updateChart()}, updateInterval);
 	*/
 }
 
