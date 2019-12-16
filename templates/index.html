@@ -60,9 +60,10 @@
 	<div id="chartContainer"  style="height: 330px; width: 60%; margin-left: 15%;">
 	</div>
 	<br>
-	<div id="refresh">
+	<div class="sensors" >
 	<p id="time">Time: {{data[0]}}</p>
-	<p id="temperature"> Temperature: {{data[1]}}</p>
+	<p id="temperature">Sensor1: {{data[1]}} </p>
+	<p id="pulse"> Sensor2: {{data[1]}}</p>
 	</div>
 	<br>
 
@@ -103,11 +104,20 @@ body{
 	color: #f67280;
 }
 
+.sensors{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 12px;
+	padding: 30px;
+	color: #f67280;
+}
+
 
 .privateData{
 	margin: 0 0 12px 0;
 	font-size: 20px;
 	color: #c7f0db;
+	width: 70%;
 	/*border-bottom: 1px dashed #888888;
 	for display data
 	<p id="time">Time: {{data[0]}}</p>
@@ -121,11 +131,11 @@ body{
 	*/
 }
 
-p:hover{
+/*p:hover{
 	color: #ff7315;
 	border-color: #d1cb7d;
 	background-color: #3a3535;
-}
+}*/
 
 form{
 	width: 70%;

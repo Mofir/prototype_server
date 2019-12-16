@@ -3,6 +3,7 @@ app = Flask(__name__)
 file_path = "./sensors_data.csv"
 my_port = 19237
 import csv
+import time 
 
 #retrieve HTML to web browser
 @app.route('/', methods=['GET'])
@@ -24,6 +25,7 @@ def get_html():
 def update_data():
     time = request.form["time"]
     sensors = request.form["sensors"]
+    sensor_monitoring(time, sensors)
     try:
         #write data to csv file
         f = open(file_path, 'w')
@@ -37,6 +39,16 @@ def update_data():
         return "fail to write"
     finally:
         f.close()
+
+#To monitor sensors data
+def sensor_monitoring(time, sensors):
+    time = request.form["time"]
+    sensors = request.form["sensors"]
+    if sensors > 37.2:
+        #for
+        return "Fever occured!"
+    elif sensors < 35.0:
+        return "Temperature is dropped!" 
 
 #reading & retrieve sensor data to web browser
 @app.route('/him', methods=['GET'])
