@@ -23,12 +23,12 @@ def get_html():
 @app.route('/him', methods=['POST'])
 def update_data():
     time = request.form["time"]
-    sensors = request.form["sensors"]
-    #sensor_monitoring(time, sensors)
+    pulse = request.form["pulse"]
+    temperature = request.form["temperature"]
     try:
         #write data to csv file
         f = open(file_path, 'w')
-        f.write(time + "," + sensors)
+        f.write(time + "," + pulse + "," + temperature)
         #with open(file_path, 'w') as f:
         #    _writer = csv.writer(f)
         #    _writer = f.write(time + "," + sensors)
@@ -39,15 +39,29 @@ def update_data():
     finally:
         f.close()
 
-#To monitor sensors data
-#def sensor_monitoring(time, sensors):
-#    time = request.form["time"]
-#    sensors = request.form["sensors"]
-#    if sensors > 37.2:
-#        #for
-#        return "Fever occured!"
-#    elif sensors < 35.0:
-#        return "Temperature is dropped!" 
+#To monitor temperature data
+#def temperature_monitoring(time, temperature):
+#    if temperature > 37.2 & temperature <= 39.9:
+#        highTemp = [38, 39]
+#        Htemp = temperature.count(highTemp)
+#        if Htemp >= 30:
+#            return "熱"
+#    elif temperature >= 40:
+#        feverTemp = 40
+ #       Ftemp = temperature.count(feverTemp)
+  #      if Ftemp >= 30:
+   #         return "High 熱"
+    #elif temperature < 31:
+     #   lowTemp = 30
+      #  Ltemp = temperature.count(lowTemp)
+       # if Ltemp >= 30:
+        #    return "Low body temperature is occured" 
+
+#fuzzy set 
+#pulse = ctrl.Antecedent(np.arange(0, 160, 80), 'pulse')
+#temperature = ctrl.Antecedent(np.arange(0, 40, 30), 'temperature')
+#arrhythmia = ctrl.Consequent(np.arrange(0, 100, 60), 'arrhythmia')
+
 
 #reading & retrieve sensor data to web browser
 @app.route('/him', methods=['GET'])

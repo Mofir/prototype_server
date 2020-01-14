@@ -20,14 +20,11 @@
 </head>
 <body onload="updateData('/him', 'element')">
 	<div class="title">Let's check health condition</div>
-	<div id="chartContainer"  style="height: 200px; width: 60%; margin-left: 15%;">
-	</div>
+	
 	<br>
-	<div class="sensors" >
-	<p id="time">Time: {{data[0]}}</p>
-	<p id="temperature">Sensor1: {{data[1]}} </p>
-	<p id="pulse"> Sensor2: {{data[1]}}</p>
-	</div>
+	<div id="time">Time: {{data[0]}}</div>
+	<div id="pulse">Pulse: {{data[1]}}</div>
+	<div id="temperature">Temperature: {{data[2]}}</div>
 	<br>
 
 	<div class="privateData">
