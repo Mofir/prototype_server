@@ -17,122 +17,18 @@
     	}
 	</script>
 	<meta http-equiv="refresh" content="4">
+	<link rel="stylesheet" href="css/style.css" />
 </head>
 <body onload="updateData('/him', 'element')">
+	<article>
 	<div class="title">Let's check health condition</div>
-	
 	<br>
 	<div id="time">Time: {{data[0]}}</div>
 	<div id="pulse">Pulse: {{data[1]}}</div>
 	<div id="temperature">Temperature: {{data[2]}}</div>
 	<br>
-
-	<div class="privateData">
-		<form action="/sensor_data.csv">
-		<p>Information of monitoring target!</p><br>
-		<p>名前: <input type="text" name="名前"></p>
-		<p>年齢: <input type="number" name="年齢"></p><br>
-		<p>Gender:</p>
-		<input type="radio" name="gender" value="male" checked> Male<br>
-  		<input type="radio" name="gender" value="female"> Female<br><br>
-  		<p>Last Check Up?</p>
-  		<input type="checkbox" name="time" value="last week">last week
-  		<input type="checkbox" name="time" value="last week">1 month ago
-  		<br><br>
-  		<input type="submit" value="Submit">
-  		<input type="reset" name="">
-  		<input type="button" onclick="alert('Hello, Good Night!')" value="Click it!">
-		</form><br>
-	</div>
-
-	<input type="button" value="更新" onClick="updateData('/him', 'element')">
-
+	<button  onClick="updateData('/him', 'element')">更新</button>
+	<br>
+	</article>
 </body>
 </html>
-
-<style class="css">
-@import 'https://fonts.googleapis.com/css?family=Copse';
-
-body{
-	background-color: #6c5b7b;
-}
-
-.title{
-	text-align: center;
-	font-size: 30px;
-	margin-bottom: 18px;
-	color: #f67280;
-}
-
-.sensors{
-	text-align: center;
-	font-size: 20px;
-	margin-bottom: 12px;
-	padding: 30px;
-	color: #f67280;
-}
-
-
-.privateData{
-	margin: 0 0 12px 0;
-	font-size: 20px;
-	color: #c7f0db;
-	width: 70%;
-	/*border-bottom: 1px dashed #888888;
-	for display data
-	<p id="time">Time: {{data[0]}}</p>
-	<p id="temperature"> Temperature: {{data[1]}}</p>
-	<p id="pulse">Pulse: {{data[2]}}</p>
-	reload page
-	<meta http-equiv="refresh" content="5" charset="utf-8">
-
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script type="text/javascript" src="reloader.js"></script>
-
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-	<script type="text/javascript">
-		var dps = ${sensorData};
-
-		var chart = new CanvasJS.Chart("chartContainer", {
-			title: {
-				text: "Temperature"
-			}
-			axisX: {
-				text: "Time"
-			}
-			axisY: {
-				text: "Temperature",
-				maximum: 40
-			}
-			data: [{
-				type: "line"
-				 dataPoints:dps
-			}]
-		});
-
-		chart.render();
-
-		var xVal = {data[0]};
-		var yVal = {data[1]};	
-		var updateInterval = 4000; //chart update every 4 seconds
- 
-		var updateChart = function () {
-		dps.push({x: xVal,y: yVal,});
-	
-		chart.render();		// update chart after specified time. 
- 		};
-	setInterval(function(){updateChart()}, updateInterval);
-	*/
-}
-
-/*p:hover{
-	color: #ff7315;
-	border-color: #d1cb7d;
-	background-color: #3a3535;
-}*/
-
-form{
-	width: 70%;
-
-}
-</style>

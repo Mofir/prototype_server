@@ -1,0 +1,7 @@
+@media (min-width: 577px) {
+    article{
+        background-color: #ffab9d;
+        padding: 16px;
+        width: 780px;
+    }
+}

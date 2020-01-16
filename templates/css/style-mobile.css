@@ -1,0 +1,10 @@
+@media screen and (max-width: 576px) {
+    article {
+        background-color: #181425;
+        color: #fff;
+        margin: 10px;
+    }
+    article p {
+        padding: 10px;
+    }
+}
