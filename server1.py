@@ -2,9 +2,6 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 file_path = "./sensors_data.csv"
 my_port = 19237
-import numpy as np
-import skfuzzy as fuzz
-from skfuzzy import control as ctrl
 import csv
 
 #retrieve HTML to web browser
@@ -44,6 +41,7 @@ def update_data():
         f.close()
 
 #fuzzy Logic 
+"""
 def fuzzy_process():
     pulse = request.form["pulse"]
     temperature = request.form["temperature"]
@@ -72,6 +70,7 @@ def fuzzy_process():
     arrhythmia.input['temperature'] = temperature
     arrhythmia.compute()
     print(arrhythmia.output['arrhythmia'])
+"""
 
 #reading & retrieve sensor data to web browser
 @app.route('/him', methods=['GET'])
