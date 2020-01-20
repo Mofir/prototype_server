@@ -2,6 +2,9 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 file_path = "./sensors_data.csv"
 my_port = 19237
+import numpy as np
+import skfuzzy as fuzz
+from skfuzzy import control as ctrl
 import csv
 
 #retrieve HTML to web browser
@@ -25,6 +28,7 @@ def update_data():
     time = request.form["time"]
     pulse = request.form["pulse"]
     temperature = request.form["temperature"]
+    fuzzy_process()
     try:
         #write data to csv file
         f = open(file_path, 'w')
@@ -39,29 +43,35 @@ def update_data():
     finally:
         f.close()
 
-#To monitor temperature data
-#def temperature_monitoring(time, temperature):
-#    if temperature > 37.2 & temperature <= 39.9:
-#        highTemp = [38, 39]
-#        Htemp = temperature.count(highTemp)
-#        if Htemp >= 30:
-#            return "熱"
-#    elif temperature >= 40:
-#        feverTemp = 40
- #       Ftemp = temperature.count(feverTemp)
-  #      if Ftemp >= 30:
-   #         return "High 熱"
-    #elif temperature < 31:
-     #   lowTemp = 30
-      #  Ltemp = temperature.count(lowTemp)
-       # if Ltemp >= 30:
-        #    return "Low body temperature is occured" 
+#fuzzy Logic 
+def fuzzy_process():
+    pulse = request.form["pulse"]
+    temperature = request.form["temperature"]
 
-#fuzzy set 
-#pulse = ctrl.Antecedent(np.arange(0, 160, 80), 'pulse')
-#temperature = ctrl.Antecedent(np.arange(0, 40, 30), 'temperature')
-#arrhythmia = ctrl.Consequent(np.arrange(0, 100, 60), 'arrhythmia')
+    pulse = ctrl.Antecedent(np.arange(0, 160, 80), 'pulse')
+    temperature = ctrl.Antecedent(np.arange(0, 40, 30), 'temperature')
+    arrhythmia = ctrl.Consequent(np.arrange(0, 100, 60), 'arrhythmia')
 
+    pulse.automf(3)
+    temperature.automf(3)
+    
+    #Pythonic API
+    arrhythmia['low'] = fuzz.trimf(arrhythmia.universe, [0,0,60])
+    arrhythmia['non'] = fuzz.trimf(arrhythmia.universe, [60, 80, 100])
+    arrhythmia['high'] = fuzz.trimf(arrhythmia.universe, [100,120,120])
+    
+    #fuzzy rule
+    rule1 = ctrl.Rule(pulse['low'] & temperature['high'], arrhythmia['low'])
+    rule2 = ctrl.Rule(pulse['normal'] & temperature['normal'], arrhythmia['non'])
+    rule3 = ctrl.Rule(pulse['high'] & temperature['high'], temperature['high'])
+    #control rule
+    arrhythmia_control = ctrl.ControlSystem([rule1, rule2, rule3])
+    arrhythmia = ctrl.ControlSystemSimulation(arrhythmia_control)
+    
+    arrhythmia.input['pulse'] = pulse
+    arrhythmia.input['temperature'] = temperature
+    arrhythmia.compute()
+    print(arrhythmia.output['arrhythmia'])
 
 #reading & retrieve sensor data to web browser
 @app.route('/him', methods=['GET'])
