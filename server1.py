@@ -25,11 +25,11 @@ def update_data():
     time = request.form["time"]
     pulse = request.form["pulse"]
     temperature = request.form["temperature"]
-    fuzzy_process()
+    #fuzzy_process()
     try:
         #write data to csv file
-        f = open(file_path, 'w')
-        f.write(time + "," + pulse + "," + temperature)
+        f = open(file_path, 'a')
+        f.append(time + "," + pulse + "," + temperature)
         #with open(file_path, 'w') as f:
         #    _writer = csv.writer(f)
         #    _writer = f.write(time + "," + sensors)
