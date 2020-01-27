@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>プロトタイプ</title>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 		const updateData = async(url, element) => {
 			const sensorData = await fetch(url)
@@ -16,19 +17,53 @@
       		$('#refresh').load(location.href + '#refresh');
     	}
 	</script>
-	<meta http-equiv="refresh" content="4">
-	<link rel="stylesheet" href="css/style.css" />
+	<meta http-equiv="refresh" content="2">
 </head>
 <body onload="updateData('/him', 'element')">
 	<article>
-	<div class="title">Let's check health condition</div>
-	<br>
+	<h1>Let's check health condition</h1>
+	<div class="data">
 	<div id="time">Time: {{data[0]}}</div>
+	<br>
 	<div id="pulse">Pulse: {{data[1]}}</div>
+	<br>
 	<div id="temperature">Temperature: {{data[2]}}</div>
-	<br>
-	<button  onClick="updateData('/him', 'element')">更新</button>
-	<br>
+	</div>
+	<!--<button  onClick="updateData('/him', 'element')">更新</button>-->
 	</article>
 </body>
 </html>
+
+<style type="text/css">
+h1{
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 20px;
+	font-family: verdana;
+}
+
+.data{
+	text-align: center;
+	padding: 20px;
+	font-size: 26px;
+	color: #ec7373;
+	border: 2px solid;
+	background-color: #333333;
+}
+
+@media screen and (max-width: 567px){
+h1{
+		text-align: center;
+		font-size: 16px;
+	}
+
+.data{
+		text-align: center;
+		padding: 10px;
+		font-size: 14px;
+		color: #ec7373;
+		border: 1px solid;
+		background-color: #35495e;
+	}
+}
+</style>

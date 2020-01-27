@@ -2,7 +2,6 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 file_path = "./sensors_data.csv"
 my_port = 19237
-import csv
 
 #retrieve HTML to web browser
 @app.route('/', methods=['GET'])
@@ -28,8 +27,8 @@ def update_data():
     #fuzzy_process()
     try:
         #write data to csv file
-        f = open(file_path, 'a')
-        f.append(time + "," + pulse + "," + temperature)
+        f = open(file_path, 'w')
+        f.write(time + "," + pulse + "," + temperature)
         #with open(file_path, 'w') as f:
         #    _writer = csv.writer(f)
         #    _writer = f.write(time + "," + sensors)
