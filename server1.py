@@ -24,11 +24,11 @@ def update_data():
     time = request.form["time"]
     pulse = request.form["pulse"]
     temperature = request.form["temperature"]
-    #fuzzy_process()
+    condition = request.form["condition"]
     try:
         #write data to csv file
         f = open(file_path, 'w')
-        f.write(time + "," + pulse + "," + temperature)
+        f.write(time + "," + pulse + "," + temperature + "," + condition)
         #with open(file_path, 'w') as f:
         #    _writer = csv.writer(f)
         #    _writer = f.write(time + "," + sensors)
@@ -38,38 +38,6 @@ def update_data():
         return "fail to write"
     finally:
         f.close()
-
-#fuzzy Logic 
-"""
-def fuzzy_process():
-    pulse = request.form["pulse"]
-    temperature = request.form["temperature"]
-
-    pulse = ctrl.Antecedent(np.arange(0, 160, 80), 'pulse')
-    temperature = ctrl.Antecedent(np.arange(0, 40, 30), 'temperature')
-    arrhythmia = ctrl.Consequent(np.arrange(0, 100, 60), 'arrhythmia')
-
-    pulse.automf(3)
-    temperature.automf(3)
-    
-    #Pythonic API
-    arrhythmia['low'] = fuzz.trimf(arrhythmia.universe, [0,0,60])
-    arrhythmia['non'] = fuzz.trimf(arrhythmia.universe, [60, 80, 100])
-    arrhythmia['high'] = fuzz.trimf(arrhythmia.universe, [100,120,120])
-    
-    #fuzzy rule
-    rule1 = ctrl.Rule(pulse['low'] & temperature['high'], arrhythmia['low'])
-    rule2 = ctrl.Rule(pulse['normal'] & temperature['normal'], arrhythmia['non'])
-    rule3 = ctrl.Rule(pulse['high'] & temperature['high'], temperature['high'])
-    #control rule
-    arrhythmia_control = ctrl.ControlSystem([rule1, rule2, rule3])
-    arrhythmia = ctrl.ControlSystemSimulation(arrhythmia_control)
-    
-    arrhythmia.input['pulse'] = pulse
-    arrhythmia.input['temperature'] = temperature
-    arrhythmia.compute()
-    print(arrhythmia.output['arrhythmia'])
-"""
 
 #reading & retrieve sensor data to web browser
 @app.route('/him', methods=['GET'])
