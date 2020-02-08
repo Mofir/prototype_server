@@ -17,6 +17,14 @@
       		$('#refresh').load(location.href + '#refresh');
     	}
 	</script>
+	<script type="text/javascript">
+		if ({{data[1]}} > 100 & {{data[2]}} < 38.0){
+			alert("There is a health problem!");
+		}
+		else if({{data[1]}} < 60){
+			alert("There is a health problem!");	
+		}
+	</script>
 	<meta http-equiv="refresh" content="2">
 </head>
 <body onload="updateData('/him', 'element')">
