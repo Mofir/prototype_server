@@ -17,14 +17,6 @@
       		$('#refresh').load(location.href + '#refresh');
     	}
 	</script>
-	<script type="text/javascript">
-		if ({{data[1]}} > 100 & {{data[2]}} < 38.0){
-			alert("There is a health problem!");
-		}
-		else if({{data[1]}} < 60){
-			alert("There is a health problem!");	
-		}
-	</script>
 	<meta http-equiv="refresh" content="2">
 </head>
 <body onload="updateData('/him', 'element')">
@@ -38,6 +30,9 @@
 	<div id="temperature">Temperature: {{data[2]}}</div>
 	<br>
 	<div id="condition">Condition: {{data[3]}}</div>
+	<br>
+	<a href="https://www.cormedicalgroup.com/services/cardiology-consultation/" target="_blank" class="button">Health Consultation</a>
+	<footer>These data are the result of probability values related to Arrhythmia!</footer>
 	</div>
 	<!--<button  onClick="updateData('/him', 'element')">更新</button>-->
 	</article>
@@ -50,6 +45,7 @@ h1{
 	margin: 0 auto;
 	padding-bottom: 20px;
 	font-family: verdana;
+	color: #fe346e;
 }
 
 .data{
@@ -57,9 +53,28 @@ h1{
 	text-align: center;
 	padding: 35px;
 	font-size: 30px;
-	color: #32afa9;
+	color: #ee8572;
 	border: 1px solid;
-	background-color: #f0cf85;
+	background-color: #347474;
+}
+
+.button{
+		 background-color: red;
+         border: none;
+         color: white;
+         padding: 10px 14px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 13px;
+         cursor: pointer;
+}
+
+footer{
+	text-align: center;
+	font-size: 15px;
+	padding-top: 3%;
+	color: black;
 }
 
 @media screen and (max-width: 567px){
