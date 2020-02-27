@@ -24,11 +24,12 @@ def update_data():
     time = request.form["time"]
     pulse = request.form["pulse"]
     temperature = request.form["temperature"]
-    condition = request.form["condition"]
+    heart_condition = request.form["pulse status"]
+    temperature_status = request.form["temperature status"]
     try:
         #write data to csv file
         f = open(file_path, 'w')
-        f.write(time + "," + pulse + "," + temperature + "," + condition)
+        f.write(time + "," + pulse + "," + temperature + "," + heart_condition + "," + temperature_status)
         #with open(file_path, 'w') as f:
         #    _writer = csv.writer(f)
         #    _writer = f.write(time + "," + sensors)
